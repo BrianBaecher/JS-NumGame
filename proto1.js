@@ -3,32 +3,30 @@ window.onload = function main() {
   let input = document.getElementById("inputField");
   let guessButton = document.getElementById("guessButton");
   let quitButton = document.getElementById("quitButton");
-  let feedback = document.getElementById("feedback")
   let gameRunning = false;
-  let answer;
-  let attempts = 0;
-  feedback.textContent = "Welcome! Click \"Start Game\" to proceed";
   guessButton.textContent = "Start Game";
   guessButton.addEventListener("click", start);
   guessButton.removeEventListener("click", evalGuess);
+  let answerGen = function answerGen(){Math.floor(Math.random() * 100) + 1; return answer};
 
   console.log(input);
   console.log(typeof input);
 
-  function reset() {// doesn't work properly. Can't tell what's happening exactly.
+  function reset() {
     guessButton.textContent = "Play Again";
     gameRunning = false;
     guessButton.addEventListener("click", start);
-    // guessButton.removeEventListener("click", evalGuess);
-    answer = null;
+    guessButton.removeEventListener("click", evalGuess);
+    answerGen;
+    console.log(parseInt(answer))
     input.disabled = true;
   }
 
   function start() {
-    feedback.textContent = "Guess a number from 1 to 100"
     input.disabled = false;
+    console.log(input);
     gameRunning = true;
-    answer = Math.floor(Math.random() * 100) + 1;
+    console.log(answerGen);
     guessButton.textContent = "Guess";
     guessButton.removeEventListener("click", start);
     guessButton.addEventListener("click", submitGuess);
@@ -39,35 +37,21 @@ window.onload = function main() {
     test = 1;
     evalGuess(input);
     input.value = "";
-    attempts++;
   }
 
   function evalGuess(guess) {
-    console.log(answer)
+    console.log(guess.value);
     if (guess.value == answer) {
       console.log("winner");
-      input.disabled = true;
-      guessButton.removeEventListener("click", submitGuess)
-      feedback.textContent = `Congrats! You got it! The secret number was ${answer}`;
-      guessButton.addEventListener("click", start);
-      gameRunning = false;
-      return;
     } else if (guess.value > 100 || guess.value < 1) {
-      console.log("invalid input");
-      feedback.textContent = "You've got to enter a NUMBER between 1 and 100"
-    }
-    else if (guess.value > answer){
-      feedback.textContent = "You guessed too HIGH of a number!"
-    }
-    else if (guess.value < answer){
-      feedback.textContent = "You guessed too LOW of a number!"
+      console.log("invalid numma");
+    } else if (guess.value < 100 && guess.value > 1) {
+      console.log("between 1 an 100");
     }
   }
-}
-// } else if (guess.value < 100 && guess.value > 1) {
-//   console.log("between 1 an 100");
-// }
-  // input for user's guesses
+};
+
+// input for user's guesses
 
 // some type of feedback element/function
 
