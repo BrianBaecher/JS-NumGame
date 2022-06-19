@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="app.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <main class="container">
-        <div class="game-container">
-            <div class="gameHeader">
-                <h1>Title Here</h1>
-                <h4>wee text</h4>
-            </div>
-            <div class="playArea">
-                <p id="feedback">Guess a number between 1 and 100</p>
-                <input type="text" name="Guess" id="inputField" disabled>
-                <button type="submit" id="guessButton">Submit</button>
-                <button type="reset" id="quitButton">Quit</button>
-            </div>
-
+      <div class="game-container">
+        <div class="gameHeaders">
+          <h1>Guess That Number!</h1>
+          <h3>The number guessing game</h3>
         </div>
+        <div class="playArea">
+          <div id="stats">
+            <p id="clock">00:00</p>
+            <div class="flexAttempt">
+              <p id="attemptCount">Total Attempts</p>
+              <p id="attempts">0</p>
+            </div>
+          </div>
+          <p id="feedback">Guess a number between 1 and 100</p>
+          <input type="text" name="Guess" id="inputField" disabled />
+          <button type="submit" id="guessButton">Submit</button>
+          <button type="reset" id="quitButton">Quit</button>
+        </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>

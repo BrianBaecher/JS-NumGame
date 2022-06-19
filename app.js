@@ -4,16 +4,16 @@ window.onload = function main() {
   let guessButton = document.getElementById("guessButton");
   let quitButton = document.getElementById("quitButton");
   let feedback = document.getElementById("feedback");
+  let clock = document.getElementById("clock");
   let gameRunning = false;
   let answer;
   let attempts = 0;
-  let clock;
   let parent = document.getElementsByClassName("playArea")
   feedback.textContent = 'Welcome! Click "Start Game" to proceed';
   guessButton.textContent = "Start Game";
   guessButton.addEventListener("click", start);
   guessButton.removeEventListener("click", evalGuess);
-
+  
   console.log(input);
   console.log(typeof input);
   // RESET -- clicking the quit button should be the only reason this runs
@@ -39,25 +39,25 @@ window.onload = function main() {
     parent[0].appendChild(quitButton);
   }
 
-  // Game Clock
-  const duration = setInterval(clock, 1000);
+  // Game Clock - not sure how to set this up
+  // const duration = setInterval(clock, 1000);
 
-  function timer() {
-    if (gameRunning == true) {
-      seconds++;
-    }
-    if (seconds > 59) {
-      seconds = 0;
-      minutes++;
-    } else {
-      clearInterval(duration);
-    }
+  // function timer() {
+  //   if (gameRunning === true) {
+  //     seconds++;
+  //   }
+  //   if (seconds > 59) {
+  //     seconds = 0;
+  //     minutes++;
+  //   } else {
+  //     clearInterval(duration);
+  //   }
 
-    playTime = `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-    timeP.textContent = playTime;
-  }
+  //   playTime = `${minutes.toString().padStart(2, "0")}:${seconds
+  //     .toString()
+  //     .padStart(2, "0")}`;
+  //   timeP.textContent = playTime;
+  // }
 
   function submitGuess(test) {
     test = 1;
