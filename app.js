@@ -6,13 +6,13 @@ window.onload = function main() {
   let feedback = document.getElementById("feedback");
   let clock = document.getElementById("clock"); // not sure if you need this
   let minutes = 0;
-  let minutesP = document.getElementById("minutes")
+  let minutesP = document.getElementById("minutes");
   let seconds = 0;
   let secondsP = document.getElementById("seconds");
   let gameRunning = false;
   let answer;
   let attempts = 0;
-  let attemptsP = document.getElementById("attempts")
+  let attemptsP = document.getElementById("attempts");
   let parent = document.getElementsByClassName("playArea");
   feedback.textContent = 'Welcome! Click "Start Game" to proceed';
   guessButton.textContent = "Start Game";
@@ -23,10 +23,14 @@ window.onload = function main() {
 
   // RESET -- clicking the quit button should be the only reason this runs
   function reset() {
-    // doesn't work properly. Can't tell what's happening exactly.
     gameRunning = false;
+    console.log(gameRunning)
+    minutesP.textContent = "00";
+    secondsP.textContent = "00";
     attempts = 0;
-    attemptsP.textContent = `${attempts.toString()}`
+    minutes = 0;
+    seconds = 0;
+    attemptsP.textContent = `${attempts.toString()}`;
     feedback.textContent = "C'mon now, don't quit!";
     guessButton.textContent = "Play Again";
     guessButton.addEventListener("click", start);
@@ -36,7 +40,11 @@ window.onload = function main() {
   // GAME START
   function start() {
     attempts = 0;
-    let gameRunning = true;
+    minutes = 0;
+    minutesP.textContent = `${minutes.toString().padStart(2, "0")}`
+    seconds = 0;
+    secondsP.textContent = `${seconds.toString().padStart(2, "0")}`
+    gameRunning = true;
     console.log(gameRunning);
     feedback.textContent = "Guess a number from 1 to 100";
     input.disabled = false;
@@ -48,20 +56,21 @@ window.onload = function main() {
     parent[0].appendChild(quitButton);
 
     // ---- Game Clock ---- can't get to stop :|
-    let duration = setInterval(timer, 1000);
+    let runningClock = setInterval(timer, 1000);
 
     function timer() {
-      if (gameRunning === true) {
+      if (gameRunning) {
+        runningClock;
         seconds++;
         secondsP.textContent = `${seconds.toString().padStart(2, "0")}`;
       }
       if (seconds > 59) {
         seconds = 0;
         minutes++;
-        secondsP.textContent = `${seconds.toString().padStart(2, "0")}`
-        minutesP.textContent = `${minutes.toString().padStart(2, "0")}`
-      } else if (gameRunning === false) {
-        clearInterval(duration);
+        secondsP.textContent = `${seconds.toString().padStart(2, "0")}`;
+        minutesP.textContent = `${minutes.toString().padStart(2, "0")}`;
+      } else if (!gameRunning) {
+        clearInterval(runningClock);
       }
     }
   }
@@ -71,14 +80,13 @@ window.onload = function main() {
     evalGuess(input);
     input.value = "";
     attempts++;
-    console.log(attempts)
-    attemptsP.textContent = `${attempts.toString()}`
+    console.log(attempts);
+    attemptsP.textContent = `${attempts.toString()}`;
   }
 
   function evalGuess(guess) {
     console.log(answer);
     if (guess.value == answer) {
-      console.log("winner");
       input.disabled = true;
       guessButton.removeEventListener("click", submitGuess);
       guessButton.textContent = "Wanna play again?";
