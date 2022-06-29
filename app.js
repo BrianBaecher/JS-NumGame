@@ -18,6 +18,11 @@ window.onload = function main() {
   guessButton.textContent = "Start Game";
   guessButton.addEventListener("click", start);
   guessButton.removeEventListener("click", evalGuess);
+  input.addEventListener('keyup', event => {
+    if (event.key == 'Enter'){
+      submitGuess()
+    }
+  })
 
   console.log(gameRunning);
 
